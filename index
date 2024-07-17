@@ -1,0 +1,156 @@
+
+import React from 'react';
+import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer,Circle } from '@react-google-maps/api';
+import { useState } from 'react';
+import { useRef, useEffect } from 'react';
+
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue, set, push, update } from 'firebase/database';
+import { useGeoFencing} from '../../components/useGeoFencing';
+
+const mapContainerStyle = {
+  width: '100vW',
+  height: '80vh',
+};
+
+
+const HomeScreen = () => {
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: 'AIzaSyBFEZ4BMNhMVw9GM5e7uhsuFrDZOV6pRCU',
+    libraries: ['places'],
+  });
+
+  const [map, setMap] = useState(null);
+  const [directionResonse, setDirectionResponse] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState({
+    "lat": 18.56171,
+    "lng": 73.81398
+  });
+  const [pointerLocation, setPointerLocation] = useState({
+    "lat":0,
+    "lng": 0
+  });
+
+  const originRef = useRef();
+  const destinationRef = useRef();
+  const defaultOptions={
+    strokeOpacity:0.5,
+    strokeWeight:2,
+    clickable:false,
+    draggable:false,
+    editable:false,
+    visible:true
+  }
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAaJ9VSPlyxcT-n7lVFnjl-DLN2W52gVKU",
+    authDomain: "hakathon24.firebaseapp.com",
+    databaseURL: "https://hakathon24-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "hakathon24",
+    storageBucket: "hakathon24.appspot.com",
+    messagingSenderId: "769742272353",
+    appId: "1:769742272353:web:61428e7bceb7af2aabb720",
+    measurementId: "G-3ZSSFTJST4"
+  };
+
+  initializeApp(firebaseConfig);
+
+  const [path, setPath] = useState(null);
+  const [index, setIndex] = useState(0);
+
+
+  async function calculateRoute() {
+    if (originRef.current.value == '' || destinationRef.current.value == '') {
+      return
+    }
+    console.log("origin value" + originRef.current.value);
+    console.log("destination value" + destinationRef.current.value)
+    const directionService = new google.maps.DirectionsService();
+    const results = await directionService.route({
+      origin: originRef.current.value,
+      destination: destinationRef.current.value,
+      travelMode: google.maps.TravelMode.DRIVING
+
+
+    })
+    setPath(JSON.stringify(results.routes[0].overview_path));
+    //console.log("results" + JSON.stringify(results.routes[0].overview_path, null, 4));
+    setDirectionResponse(results);
+  }
+
+
+
+  function proceedWithRoute() {
+    //console.log('Show path:: ' + path);
+    console.log('pathIndex: ' + index);
+    let pathJson = JSON.parse(path);
+    if (path) {
+      console.log('Progress on path ');
+      if (index == (pathJson.length + 1))
+        console.log('Reached destination');
+      else {
+        setIndex(index + 1);
+        setCurrentLocation(pathJson[index]);
+      }
+    } else
+      console.log('No path set');
+  }
+
+  function geoFenceCheck(){
+  console.log('start geoFenceCheck');
+   const { isWithinGeoFence } = useGeoFencing({lat:18.596243220569, long:73.7878708095517,radius: 50});
+   setPointerLocation({lat:currentLocation.lat, lng:currentLocation.lng});
+   setCurrentLocation({lat: 18.5962432205695, lng: 73.7878708095517});
+   const lat1 = this.latitude
+   const lon1 = this.longitude
+   const R = 63710; // Earth's radius in m
+
+   return Math.acos(Math.sin(lat1) * Math.sin(lat2) +
+       Math.cos(lat1) * Math.cos(lat2) *
+       Math.cos(lon2 - lon1)) * R < this.radius;
+  }
+
+  function resetLocation(){
+    let pathJson = JSON.parse(path);
+    setCurrentLocation(pathJson[0]);
+    setIndex(0);
+  }
+
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Loading maps</div>;
+  }
+
+  return (
+    <div>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={10}
+        center={currentLocation}
+        onLoad={map => setMap(map)}
+
+      >
+        <Marker position={currentLocation} />
+        {directionResonse && (<DirectionsRenderer directions={directionResonse} />)}
+        <Circle center={currentLocation} radius={100} options={defaultOptions}/>
+      </GoogleMap>
+      <Autocomplete>
+        <input type="text" placeholder='Source location' ref={originRef} />
+      </Autocomplete>
+      <Autocomplete>
+        <input type="text" placeholder='Destination location' ref={destinationRef} />
+      </Autocomplete>
+      
+      <button onClick={calculateRoute}>Get Direction</button>
+      <button onClick={proceedWithRoute}>Move</button>
+      <button onClick={resetLocation}>Reset User location</button>
+
+      <button onClick={geoFenceCheck}>Out of Radious Check</button>
+    </div>
+  );
+};
+
+export default HomeScreen;
