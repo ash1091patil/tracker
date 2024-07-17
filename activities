@@ -1,0 +1,97 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { StyleSheet, Image, Platform,SafeAreaView, ScrollView } from 'react-native';
+import { PaperProvider, Card,IconButton } from 'react-native-paper';
+
+export default function TabTwoScreen() {
+  const activities = [
+    {
+        id:1,
+        description :'Garden walk',
+        dest:'ABC Graden',
+        isCompleted: 'false',
+        dateTime: '07:00 AM'
+    },
+    {
+      id:3,
+      description :'Doctors Appointment',
+      dest:'Imperial Society, Bandra East',
+      isCompleted: 'false',
+      dateTime: '11:00 AM'
+  },
+    {
+        id:2,
+        description :'Attend birthday party',
+        dest:'Imperial Society, Bandra East',
+        isCompleted: 'false',
+        dateTime: '06:00 PM'
+    }
+    
+  ];
+  const leftComponent = ({ size }: { size: number }) => (
+    <Image
+      resizeMode="cover"
+      style={{ width: size, height: size, borderRadius: size / 2 }}
+      source={{
+        uri: 'https://fastly.picsum.photos/id/168/700/700.jpg?hmac=TdvFbMN99iyiBXtZ2P8n01OzXKYcEjCkhlSnsZZ5LyU',
+      }}
+    />
+  );
+
+  const rightComponent = ({ size }: { size: number }) => (
+    <Image
+      resizeMode="contain"
+      style={{
+        width: size / 1.5,
+        height: size / 1.5,
+      }}
+      source={{ uri: 'right-arrow' }}
+    />
+  );
+  return (
+    <>
+      <PaperProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView>
+
+        {activities.map(item => (
+          <li key={item.id}>
+          <Card style={styles.card}> 
+          <Card.Title
+            title={item.description} 
+            subtitle={item.dest}
+            titleStyle={styles.titleStyle}
+            subtitleStyle={styles.subtitleStyle}
+            left={leftComponent}
+            right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
+          /> 
+          <Card.Title title={item.dateTime}
+          right={(props) => <IconButton {...props} icon="clock" onPress={() => {}} />} /> 
+         
+        </Card> </li>
+        
+        ))}
+
+      
+        </ScrollView>
+      </SafeAreaView>
+    </PaperProvider>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  headerImage: {
+    color: '#808080',
+    bottom: -90,
+    left: -35,
+    position: 'absolute',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  card: { marginHorizontal: 20, marginVertical: 10, color: '#808080' },
+  titleStyle: { fontSize: 18, fontWeight: 'bold' },
+  subtitleStyle: { fontSize: 14 },
+  alignCenter: { alignSelf: 'center' },
+});
