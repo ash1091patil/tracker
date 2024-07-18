@@ -16,7 +16,7 @@ const mapContainerStyle = {
 
 const HomeScreen = () => {
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyBFEZ4BMNhMVw9GM5e7uhsuFrDZOV6pRCU',
+    googleMapsApiKey: 'AIzaSyBFEZ4BshjaghvjjbRCU',
     libraries: ['places'],
   });
 
@@ -43,14 +43,14 @@ const HomeScreen = () => {
   }
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAaJ9VSPlyxcT-n7lVFnjl-DLN2W52gVKU",
+    apiKey: "AIzaSyAaJn7lVFnckh DC vshncasvbn2W52gVKU",
     authDomain: "hakathon24.firebaseapp.com",
     databaseURL: "https://hakathon24-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "hakathon24",
     storageBucket: "hakathon24.appspot.com",
     messagingSenderId: "769742272353",
-    appId: "1:769742272353:web:61428e7bceb7af2aabb720",
-    measurementId: "G-3ZSSFTJST4"
+    appId: "1:7697bdx2353:web:61428e7bcedgbvbb720",
+    measurementId: "G-3ZshbTJST4"
   };
 
   initializeApp(firebaseConfig);
