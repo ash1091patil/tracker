@@ -1,64 +1,37 @@
 [
     {
         "id" : 1,
-        "activity name" : "Walk",
-        "description" : "Walk in house garden",
-        "activity type" : "indoor",
-        "destination" : "Garden area",
-        "Contact Person" : "person 1", 
-        "isCompleted" : "false",
-        "date Time" : "07:00 AM daily",
-        "checklist" : [
-                        {
-                            "id" : "1",
-                            "description" : "checklist point 1"
-                        },
-                        {
-                            "id" : "2",
-                            "description" : "checklist point 2"
-                        }
-                      ]
+        "name" : "User 1",
+        "gender" : "Male",
+        "Address" : "Lane 1, area 1, london",
+        "phone" : "+19023456289"
         "pictures" : [
                         {
                             "id" : "1",
-                            "path" : "./pic1.png"
+                            "path" : "./userpic1.png"
                         },
                         {
                             "id" : "2",
-                            "path" : "./pic2.png"
+                            "path" : "./userpic2.png"
                         },
                       ]
     },
     {
         "id" : 2,
-        "activity name" : "Doctors Appointment",
-        "description" : "Appointment to Doctor",
-        "activity type" : "Outdoor",
-        "destination" : "Imperial Society, Bandra East",
-        "Contact Person" : "doctor 1", 
-        "isCompleted" : "false",
-        "date Time" : "10:00 AM daily",
-        "checklist" : [
-                        {
-                            "id" : "1",
-                            "description" : "checklist point 3"
-                        },
-                        {
-                            "id" : "2",
-                            "description" : "checklist point 4"
-                        }
-                      ]
+        "name" : "User 2",
+        "gender" : "IGBTQ",
+        "Address" : "Lane 2, area 2, london",
+        "phone" : "+19023426639"
         "pictures" : [
                         {
                             "id" : "1",
-                            "path" : "./pic3.png"
+                            "path" : "./userpic3.png"
                         },
                         {
                             "id" : "2",
-                            "path" : "./pic4.png"
+                            "path" : "./userpic4.png"
                         },
                       ]
     }
-
     
 ]
