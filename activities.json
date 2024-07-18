@@ -21,11 +21,11 @@
         "pictures" : [
                         {
                             "id" : "1",
-                            "path" : "./pic1.png"
+                            "path" : "./activitypic1.png"
                         },
                         {
                             "id" : "2",
-                            "path" : "./pic2.png"
+                            "path" : "./activitypic2.png"
                         },
                       ]
     },
@@ -51,11 +51,11 @@
         "pictures" : [
                         {
                             "id" : "1",
-                            "path" : "./pic3.png"
+                            "path" : "./activitypic3.png"
                         },
                         {
                             "id" : "2",
-                            "path" : "./pic4.png"
+                            "path" : "./activitypic4.png"
                         },
                       ]
     }
