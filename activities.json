@@ -1,10 +1,20 @@
 [
     {
-        "id":1,
-        "description" :"Garden walk",
-        "dest":"ABC Graden",
-        "isCompleted": "false",
-        "dateTime": "07:00 AM"
+        "id" : 1,
+        "activity name" : "Walk",
+        "description" : "Walk in house garden",
+        "activity type" : "indoor",
+        "destination" : "Garden area",
+        "Contact Person" : "person 1", 
+        "isCompleted" : "false",
+        "date Time" : "07:00 AM daily",
+        "checklist" : [
+                        {
+                            "id" : "1",
+                            "description" : "checklist point 1"
+                        }
+                      ]
+        "pictures" : "pic 1, pic2"
     },
     {
       "id":2,
@@ -13,4 +23,31 @@
       "isCompleted": "false",
       "dateTime": "11:00 AM"
   }
+
+  {
+        "id":3,
+        "description" : "gardening",
+        "activity name" : "gardening"
+        "destination": "House Garden",
+        "isCompleted": "false",
+        "dateTime": "07:00 AM",
+        "activity type" : "outdoor",
+        "pictures" : "pic 1, pic2",
+        "equipments" : "equip1, equip2"    
+  },
+    {
+        "id":4,
+        "description" : "visiting friend's house",
+        "activity name" : "friends visit"
+        "destination": "visiting friend 1",
+        "isCompleted": "false",
+        "dateTime": "07:00 AM",
+        "activity type" : "outdoor",
+        "pictures" : "pic 1, pic2",
+        "friends name" : "friend 1, friend 2"
+        ""
+  }
+
+
+    
 ]
